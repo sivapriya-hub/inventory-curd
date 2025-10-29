@@ -1,89 +1,180 @@
+/* Global Styling */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
 body {
-  font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #121212, #2b2b2b);
-  color: #f2f2f2;
-  height: 100vh;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    background: linear-gradient(135deg, #141e30, #243b55);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 30px 10px;
 }
 
+/* Container */
 .container {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 40px;
-  border-radius: 20px;
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
-  text-align: center;
-  width: 350px;
-  backdrop-filter: blur(10px);
-  animation: fadeIn 1.2s ease-in-out;
+    width: 100%;
+    max-width: 1000px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
 }
 
-.title {
-  font-size: 2rem;
-  margin-bottom: 10px;
-  color: #00e0ff;
+/* Headings */
+h1, h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
 }
 
-.subtitle {
-  color: #b3b3b3;
-  margin-bottom: 20px;
+h1 {
+    color: #00d4ff;
+    text-shadow: 0 0 10px #00d4ff;
 }
 
-.form-box input {
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border-radius: 10px;
-  border: none;
-  background: rgba(255,255,255,0.1);
-  color: #fff;
-  font-size: 1rem;
+h2 {
+    color: #ffcc70;
 }
 
-.form-box button {
-  width: 100%;
-  padding: 12px;
-  border: none;
-  background: #00e0ff;
-  color: #121212;
-  font-size: 1rem;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: 0.3s;
+/* Form Section */
+.form-section {
+    margin-bottom: 25px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 20px;
+    transition: transform 0.3s ease;
 }
 
-.form-box button:hover {
-  background: #00b8cc;
+.form-section:hover {
+    transform: scale(1.02);
 }
 
-.logout-btn {
-  background: #ff4d4d;
-  color: white;
-  border: none;
-  padding: 12px 25px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.3s;
+form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
 }
 
-.logout-btn:hover {
-  background: #e60000;
+input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 180px;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
 }
 
-.error-msg {
-  color: #ff5555;
-  margin-top: 10px;
-  font-weight: bold;
+input::placeholder {
+    color: #ccc;
 }
 
-.fade-in {
-  animation: fadeIn 1s ease-in;
+button {
+    background-color: #00d4ff;
+    border: none;
+    color: #141e30;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
+button:hover {
+    background-color: #ffcc70;
+    color: #141e30;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Inventory List Section */
+.inventory-list {
+    margin-top: 25px;
+}
+
+#searchBox {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 12px;
+}
+
+th {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Action Buttons */
+.action-btn {
+    background-color: #00d4ff;
+    color: #141e30;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.action-btn:hover {
+    background-color: #ffcc70;
+}
+
+/* 🌍 Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    form {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    input, button {
+        width: 90%;
+    }
+
+    table, th, td {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
 }

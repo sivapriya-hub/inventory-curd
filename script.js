@@ -1,44 +1,107 @@
-// Simple demo credentials
-const validUser = { username: "admin", password: "12345" };
+// Get elements
+const inventoryForm = document.getElementById('inventoryForm');
+const productName = document.getElementById('productName');
+const category = document.getElementById('category');
+const price = document.getElementById('price');
+const quantity = document.getElementById('quantity');
+const inventoryTable = document.querySelector('#inventoryTable tbody');
+const addBtn = document.getElementById('addBtn');
+const updateBtn = document.getElementById('updateBtn');
+const editIndex = document.getElementById('editIndex');
+const searchBox = document.getElementById('searchBox');
 
-// Handle Login
-document.addEventListener("DOMContentLoaded", () => {
-  const loginForm = document.getElementById("loginForm");
-  const errorMsg = document.getElementById("errorMsg");
-  const userDisplay = document.getElementById("user");
-  const logoutBtn = document.getElementById("logoutBtn");
+// Load data from localStorage
+let inventory = JSON.parse(localStorage.getItem('inventory')) || [];
 
-  // LOGIN PAGE LOGIC
-  if (loginForm) {
-    loginForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const username = document.getElementById("username").value.trim();
-      const password = document.getElementById("password").value.trim();
-
-      if (username === validUser.username && password === validUser.password) {
-        localStorage.setItem("loggedInUser", username);
-        window.location.href = "welcome.html";
-      } else {
-        errorMsg.textContent = "Invalid username or password!";
-      }
+// Render table
+function displayInventory(items = inventory) {
+    inventoryTable.innerHTML = "";
+    items.forEach((item, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${item.productName}</td>
+            <td>${item.category}</td>
+            <td>₹${item.price}</td>
+            <td>${item.quantity}</td>
+            <td>₹${item.price * item.quantity}</td>
+            <td>
+                <button class="action-btn" onclick="editItem(${index})">✏️ Edit</button>
+                <button class="action-btn" onclick="deleteItem(${index})">🗑️ Delete</button>
+            </td>
+        `;
+        inventoryTable.appendChild(row);
     });
-  }
+}
 
-  // WELCOME PAGE LOGIC
-  if (userDisplay) {
-    const loggedUser = localStorage.getItem("loggedInUser");
-    if (!loggedUser) {
-      window.location.href = "index.html"; // Redirect if not logged in
-    } else {
-      userDisplay.textContent = loggedUser;
-    }
-  }
+// Save to localStorage
+function saveInventory() {
+    localStorage.setItem('inventory', JSON.stringify(inventory));
+}
 
-  // LOGOUT
-  if (logoutBtn) {
-    logoutBtn.addEventListener("click", () => {
-      localStorage.removeItem("loggedInUser");
-      window.location.href = "index.html";
-    });
-  }
+// Add new item
+inventoryForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const newItem = {
+        productName: productName.value,
+        category: category.value,
+        price: parseFloat(price.value),
+        quantity: parseInt(quantity.value)
+    };
+
+    inventory.push(newItem);
+    saveInventory();
+    displayInventory();
+    inventoryForm.reset();
 });
+
+// Edit item
+function editItem(index) {
+    const item = inventory[index];
+    productName.value = item.productName;
+    category.value = item.category;
+    price.value = item.price;
+    quantity.value = item.quantity;
+    editIndex.value = index;
+    addBtn.classList.add('hidden');
+    updateBtn.classList.remove('hidden');
+}
+
+// Update item
+updateBtn.addEventListener('click', () => {
+    const index = editIndex.value;
+    inventory[index] = {
+        productName: productName.value,
+        category: category.value,
+        price: parseFloat(price.value),
+        quantity: parseInt(quantity.value)
+    };
+
+    saveInventory();
+    displayInventory();
+    inventoryForm.reset();
+    addBtn.classList.remove('hidden');
+    updateBtn.classList.add('hidden');
+});
+
+// Delete item
+function deleteItem(index) {
+    if (confirm("Are you sure you want to delete this item?")) {
+        inventory.splice(index, 1);
+        saveInventory();
+        displayInventory();
+    }
+}
+
+// Search functionality
+searchBox.addEventListener('input', function () {
+    const query = searchBox.value.toLowerCase();
+    const filtered = inventory.filter(item =>
+        item.productName.toLowerCase().includes(query) ||
+        item.category.toLowerCase().includes(query)
+    );
+    displayInventory(filtered);
+});
+
+// Initial display
+displayInventory();
