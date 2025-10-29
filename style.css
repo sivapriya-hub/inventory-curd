@@ -1,180 +1,140 @@
-/* Global Styling */
+
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
 body {
-    background: linear-gradient(135deg, #141e30, #243b55);
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: 100vh;
-    padding: 30px 10px;
+  background: #2a6f97;
+  color: #f7eeee;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 20px;
 }
-
-/* Container */
 .container {
-    width: 100%;
-    max-width: 1000px;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 25px;
-    border-radius: 20px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(10px);
+  width: 100%;
+  max-width: 900px;
+  background: #014f86;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  padding: 20px;
 }
-
-/* Headings */
 h1, h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    letter-spacing: 1px;
+  text-align: center;
+  margin-bottom: 15px;
 }
 
 h1 {
-    color: #00d4ff;
-    text-shadow: 0 0 10px #00d4ff;
+  border-bottom: 2px solid #fff;
+  padding-bottom: 5px;
 }
 
 h2 {
-    color: #ffcc70;
+  color: #fafaf9;
 }
-
-/* Form Section */
 .form-section {
-    margin-bottom: 25px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
-    padding: 20px;
-    transition: transform 0.3s ease;
-}
-
-.form-section:hover {
-    transform: scale(1.02);
+  background: #639900;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 20px;
 }
 
 form {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+input, button {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #fff;
 }
 
 input {
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    width: 180px;
-    outline: none;
-    background-color: rgba(255, 255, 255, 0.2);
-    color: #fff;
+  width: 180px;
+  background: #7dc9ff;
+  color: #fff;
 }
 
 input::placeholder {
-    color: #ccc;
+  color: #b40404;
 }
 
 button {
-    background-color: #00d4ff;
-    border: none;
-    color: #141e30;
-    font-weight: bold;
-    padding: 10px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
+  background: #ffcc70;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 button:hover {
-    background-color: #ffcc70;
-    color: #141e30;
-}
-
-.hidden {
-    display: none;
-}
-
-/* Inventory List Section */
-.inventory-list {
-    margin-top: 25px;
+  background: #ffd98e;
 }
 
 #searchBox {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    background-color: rgba(255, 255, 255, 0.2);
-    border: none;
-    color: white;
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #fff;
+  background: #01497c;
+  color: #fff;
+  margin-bottom: 10px;
 }
 
-/* Table Styling */
 table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: center;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
-    overflow: hidden;
+  width: 100%;
+  border-collapse: collapse;
+  border: 2px solid #fff;
+  text-align: center;
+  background: #014f86;
 }
 
 th, td {
-    padding: 12px;
+  border: 1px solid #fff;
+  padding: 8px;
 }
 
 th {
-    background: rgba(255, 255, 255, 0.2);
+  background: #2c7da0;
 }
 
 tr:nth-child(even) {
-    background: rgba(255, 255, 255, 0.05);
+  background: #01497c;
 }
 
-/* Action Buttons */
 .action-btn {
-    background-color: #00d4ff;
-    color: #141e30;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.3s;
+  background: #ffcc70;
+  color: #000;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .action-btn:hover {
-    background-color: #ffcc70;
+  background: #ffd98e;
 }
 
-/* 🌍 Responsive Design */
 @media (max-width: 768px) {
-    .container {
-        padding: 15px;
-    }
+  form {
+    flex-direction: column;
+  }
 
-    form {
-        flex-direction: column;
-        align-items: center;
-    }
+  input, button {
+    width: 90%;
+  }
 
-    input, button {
-        width: 90%;
-    }
-
-    table, th, td {
-        font-size: 14px;
-        padding: 8px;
-    }
-
-    h1 {
-        font-size: 24px;
-    }
-
-    h2 {
-        font-size: 18px;
-    }
+  table, th, td {
+    font-size: 14px;
+  }
 }
+
+

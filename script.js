@@ -1,4 +1,4 @@
-// Get elements
+
 const inventoryForm = document.getElementById('inventoryForm');
 const productName = document.getElementById('productName');
 const category = document.getElementById('category');
@@ -9,11 +9,7 @@ const addBtn = document.getElementById('addBtn');
 const updateBtn = document.getElementById('updateBtn');
 const editIndex = document.getElementById('editIndex');
 const searchBox = document.getElementById('searchBox');
-
-// Load data from localStorage
 let inventory = JSON.parse(localStorage.getItem('inventory')) || [];
-
-// Render table
 function displayInventory(items = inventory) {
     inventoryTable.innerHTML = "";
     items.forEach((item, index) => {
@@ -25,20 +21,17 @@ function displayInventory(items = inventory) {
             <td>${item.quantity}</td>
             <td>₹${item.price * item.quantity}</td>
             <td>
-                <button class="action-btn" onclick="editItem(${index})">✏️ Edit</button>
-                <button class="action-btn" onclick="deleteItem(${index})">🗑️ Delete</button>
+                <button class="action-btn" onclick="editItem(${index})">Edit</button>
+                <button class="action-btn" onclick="deleteItem(${index})">Delete</button>
             </td>
         `;
         inventoryTable.appendChild(row);
     });
 }
-
-// Save to localStorage
 function saveInventory() {
     localStorage.setItem('inventory', JSON.stringify(inventory));
 }
 
-// Add new item
 inventoryForm.addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -55,7 +48,6 @@ inventoryForm.addEventListener('submit', function (e) {
     inventoryForm.reset();
 });
 
-// Edit item
 function editItem(index) {
     const item = inventory[index];
     productName.value = item.productName;
@@ -66,8 +58,6 @@ function editItem(index) {
     addBtn.classList.add('hidden');
     updateBtn.classList.remove('hidden');
 }
-
-// Update item
 updateBtn.addEventListener('click', () => {
     const index = editIndex.value;
     inventory[index] = {
@@ -83,8 +73,6 @@ updateBtn.addEventListener('click', () => {
     addBtn.classList.remove('hidden');
     updateBtn.classList.add('hidden');
 });
-
-// Delete item
 function deleteItem(index) {
     if (confirm("Are you sure you want to delete this item?")) {
         inventory.splice(index, 1);
@@ -92,8 +80,6 @@ function deleteItem(index) {
         displayInventory();
     }
 }
-
-// Search functionality
 searchBox.addEventListener('input', function () {
     const query = searchBox.value.toLowerCase();
     const filtered = inventory.filter(item =>
@@ -102,6 +88,4 @@ searchBox.addEventListener('input', function () {
     );
     displayInventory(filtered);
 });
-
-// Initial display
 displayInventory();
